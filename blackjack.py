@@ -161,10 +161,38 @@ else:
 				stand_prob = stand( cards )
 				print("cards: {}, hit: {}, stand: {}".format(cards, hit_prob, stand_prob))
 				probList.append( (cards, hit_prob, stand_prob) )
+	
 	# save to file
 	with open("raw.json","w") as fp:
 		print("Saving to "+fp.name)
 		json.dump(probList, fp)
+
+	# save pretty version for easier reading by humans
+	with open("raw_pretty.json","w") as fp:
+		print("Saving pretty output to "+fp.name)
+		probListPretty = []
+		for i in probList:
+			probListPretty.append(
+				{
+					"cards": {
+						"player": i[0][0],
+						"dealer": i[0][1],
+					},
+					"probs": {	
+						"hit": {
+							"win": i[1][0],
+							"tie": i[1][1],
+							"lose": i[1][2]
+						},
+						"stand": {
+							"win": i[2][0],
+							"tie": i[2][1],
+							"lose": i[2][2]
+						}
+					}
+				})
+		json.dumps(probListPretty, fp, sort_keys=True, indent=2)
+
 
 accum = 0
 
