@@ -54,8 +54,6 @@ def calcDealer(cards):
 				retProb[3] += scaledProb[3]
 				retProb[4] += scaledProb[4]
 				retProb[5] += scaledProb[5]
-
-
 		return retProb
 	elif upTotal == 17:
 		return (0,1,0,0,0,0)
